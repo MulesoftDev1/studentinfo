@@ -1,0 +1,30 @@
+#%RAML 1.0
+title: student
+version: v1.0
+baseUri: http://localhost:8081/api
+protocols:
+  - HTTPS
+mediaType: 
+- application/json
+
+/student:
+  description: we will get the student details
+  get:
+    queryParameters:
+      name:
+        type: string
+        required: true
+    headers:
+      appname:
+        type: string
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"students":[
+              {"studentID":"1", "studentName":"satya","class":"BTech"},
+              {"studentID":"2", "studentName":"shiva","class":"BTech"}
+              ]}
+    

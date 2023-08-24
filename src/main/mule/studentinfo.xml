@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<sub-flow name="studentinfoSub_Flow" doc:id="920f519d-17ab-4d99-8ff6-f2a00e8969fa" >
+		<logger level="INFO" doc:name="Logger" doc:id="52a267c5-5dc5-4010-8d7d-039dd0940340" />
+		<choice doc:name="Choice" doc:id="628ba913-6420-47bb-938d-64d2eb0d0b75" >
+			<when expression="#[output application/json&#10;---&#10; (! isEmpty(attributes.queryParams.name))]" >
+				<ee:transform doc:name="Transform Message" doc:id="fcb40440-2582-4efe-965a-6123ffe5e2b6" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	
+	"name": "satyakumar",
+	"age": 29,
+	"class": "btech"
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<logger level="INFO" doc:name="Logger" doc:id="9bf88773-f057-4fcf-9d12-83e7be08b4d0" message='#["name payload"]' />
+			</when>
+			<otherwise >
+				<ee:transform doc:name="Transform Message" doc:id="c1e8c61e-b9cc-48bc-bd59-208573d37f07" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	"key": "invalid input"
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</otherwise>
+		</choice>
+		<ee:transform doc:name="Transform Message" doc:id="6490d886-302d-48b0-a2a2-f61ac8e98955" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+response:payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger1" doc:id="273e19fe-d46e-4647-9d74-1bc5ec0ef259" message="#[payload]" />
+	</sub-flow>
+</mule>

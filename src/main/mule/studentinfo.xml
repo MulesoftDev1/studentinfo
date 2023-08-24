@@ -44,6 +44,6 @@ output application/json
 response:payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger1" doc:id="273e19fe-d46e-4647-9d74-1bc5ec0ef259" message="#[payload]" />
+		<logger level="INFO" doc:name="final response" doc:id="273e19fe-d46e-4647-9d74-1bc5ec0ef259" message="#[payload]" />
 	</sub-flow>
 </mule>

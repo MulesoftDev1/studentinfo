@@ -25,6 +25,26 @@
 				<version>3.2.0</version>
 			</plugin>
 			<plugin>
+<groupId>org.mule.tools.maven</groupId>
+<artifactId>mule-maven-plugin</artifactId>
+<version>${mule.maven.plugin.version}</version>
+<extensions>true</extensions>
+<configuration>
+<cloudHubDeployment>
+<uri>https://anypoint.mulesoft.com</uri>
+<muleVersion>${app.runtime}</muleVersion>
+<username>${username}</username>
+<password>${password}</password>
+<applicationName>studentinfo</applicationName>
+<environment>Sandbox</environment>
+<workerType>MICRO</workerType>
+<region>us-east-2</region>
+<workers>1</workers>
+<objectStoreV2>true</objectStoreV2>
+</cloudHubDeployment>
+</configuration>
+</plugin>
+			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
